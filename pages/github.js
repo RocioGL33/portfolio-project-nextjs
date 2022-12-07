@@ -1,11 +1,6 @@
 import Layout from "../components/Layout";
-import Error from "./_error";
 
-const Github = ({ user, statusCode }) => {
-  if (statusCode) {
-    return <Error statusCode={statusCode} />;
-  }
-  console.log(user);
+const Github = ({ user }) => {
   return (
     <Layout footer={false} dark>
       <div className="row">
@@ -31,16 +26,5 @@ const Github = ({ user, statusCode }) => {
     </Layout>
   );
 };
-export async function getServerSideProps() {
-  const result = await fetch("https://api.github.com/users/RocioGL33");
-  const data = await result.json();
-  const statusCode = result.status > 200 ? result.status : false;
-  return {
-    props: {
-      user: data,
-      statusCode,
-    },
-  };
-}
 
 export default Github;
